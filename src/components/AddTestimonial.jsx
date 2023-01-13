@@ -19,6 +19,7 @@ const AddTestimonial = () => {
     e.preventDefault()
     console.log(name, testimonial)
   }
+
   return (
     <div
       style={{
@@ -38,7 +39,8 @@ const AddTestimonial = () => {
           backgroundColor: 'white',
           width: '300px',
           padding: '15px',
-          borderRadius: '15px'
+          borderRadius: '15px',
+          overflow: 'hidden'
         }}
       >
         <div style={{ paddingBottom: '15px' }}>Add Testimonial</div>
@@ -53,7 +55,7 @@ const AddTestimonial = () => {
             onChange={onChange}
           />
           <textarea
-            rows='15'
+            rows='11'
             cols='5'
             type='text'
             className='update-input'

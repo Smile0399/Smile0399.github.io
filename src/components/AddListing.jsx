@@ -1,16 +1,24 @@
 import { useState } from 'react'
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL
+} from 'firebase/storage'
+import { db } from '../firebase.config'
 
 const AddListing = () => {
   const [formData, setFormData] = useState({
     url: '',
-    street: '',
     price: '',
+    street: '',
     city: '',
     state: '',
-    zipcode: ''
+    zipcode: '',
+    sold: false
   })
 
-  const { url, street, price, city, state, zipcode } = formData
+  const { url, price, street, city, state, zipcode, sold } = formData
   const onChange = e => {
     setFormData(prevState => ({
       ...prevState,
@@ -18,9 +26,28 @@ const AddListing = () => {
     }))
   }
 
+  const onMutate = e => {
+    setFormData(prevState => ({
+      ...prevState,
+      url: e.target.files
+    }))
+  }
+
   const onSubmit = e => {
     e.preventDefault()
-    console.log(url, price, street, city, state, zipcode)
+
+    if (!url || !price || !street || !city || !state || !zipcode) {
+      return alert('Missing information')
+    }
+
+    // check to make sure the image is of a valid type
+    const isValid = /\.(jpg|jpeg|png)$/i.test(url[0].name)
+    if (!isValid) {
+      return alert('Invalid file type please select a jpg, jpeg, or png file')
+    }
+
+    const listing = { url, price, street, city, state, zipcode, sold }
+    console.log(listing)
   }
   return (
     <div
@@ -47,13 +74,13 @@ const AddListing = () => {
         <div style={{ paddingBottom: '15px' }}>Add Listing</div>
         <form onSubmit={e => onSubmit(e)}>
           <input
-            type='text'
+            type='file'
             className='update-input'
-            placeholder='url'
             id='url'
+            label='url'
             name='url'
-            value={url}
-            onChange={onChange}
+            accept='image/*'
+            onChange={onMutate}
           />
           <input
             type='text'
