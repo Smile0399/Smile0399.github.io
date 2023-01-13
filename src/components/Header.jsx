@@ -1,4 +1,6 @@
 import DropDown from './DropDown'
+import { Link } from 'react-router-dom'
+import { Tooltip as ReactToolTip } from 'react-tooltip'
 
 const Header = () => {
   return (
@@ -27,7 +29,7 @@ const Header = () => {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <a style={{ flexShrink: '1' }} href='/'>
+            <Link style={{ flexShrink: '1' }} to='/'>
               <div
                 style={{
                   display: 'flex',
@@ -40,7 +42,7 @@ const Header = () => {
                   alt='KW LOGO'
                 />
               </div>
-            </a>
+            </Link>
           </div>
           <div>{/*placeholder for spacing*/}</div>
           <div
@@ -59,6 +61,15 @@ const Header = () => {
             <DropDown
               title='Pam Taylor'
               options={['About', 'Testimonials', 'Contact']}
+            />
+            &nbsp;
+            <Link id='login-link' className='login-link' to='/Login'>
+              <i className={`fa-solid fa-sign-in`}></i>
+            </Link>
+            <ReactToolTip
+              anchorId='login-link'
+              place='bottom'
+              content='Login'
             />
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 const DropDown = ({ title, options }) => {
   const [open, setOpen] = useState(false)
@@ -32,9 +33,9 @@ const DropDown = ({ title, options }) => {
       {open ? (
         <ul className='menu'>
           {options.map(option => (
-            <a className='dropdown-links' href={`/${option}`}>
+            <Link className='dropdown-links' to={`/${option}`}>
               <li className='menu-item'>{option}</li>
-            </a>
+            </Link>
           ))}
         </ul>
       ) : null}

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import 'react-tooltip/dist/react-tooltip.css'
 
 import Header from './components/Header'
 import Home from './pages/Home'
@@ -7,6 +8,7 @@ import Sold from './pages/Sold'
 import About from './pages/About'
 import Testimonials from './pages/Testimonials'
 import Contact from './pages/Contact'
+import Login from './pages/Login'
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
             <Route path='/About' element={<About />}></Route>
             <Route path='/Testimonials' element={<Testimonials />}></Route>
             <Route path='/Contact' element={<Contact />}></Route>
+            <Route path='/Login' element={<Login />}></Route>
           </Routes>
         </div>
       </Router>
