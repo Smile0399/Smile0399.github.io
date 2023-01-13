@@ -1,6 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../firebase.config'
+
+import AddListing from '../components/AddListing'
+import AddTestimonial from '../components/AddTestimonial'
 
 const Update = () => {
   const navigate = useNavigate()
@@ -12,6 +15,7 @@ const Update = () => {
       }
     })
   })
+
   return (
     <div>
       <div>
@@ -23,7 +27,16 @@ const Update = () => {
             height: '100vh'
           }}
         >
-          <div>Template starts here</div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              flexWrap: 'wrap'
+            }}
+          >
+            <AddListing />
+            <AddTestimonial />
+          </div>
         </div>
       </div>
     </div>

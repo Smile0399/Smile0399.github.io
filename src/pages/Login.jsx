@@ -98,7 +98,7 @@ const Login = () => {
                   onChange={onChange}
                 />
 
-                <input type='submit' className='login-submit' value='Login' />
+                <input type='submit' className='form-submit' value='Login' />
               </form>
             </div>
           </div>
