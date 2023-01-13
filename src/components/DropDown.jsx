@@ -33,7 +33,7 @@ const DropDown = ({ title, options }) => {
       {open ? (
         <ul className='menu'>
           {options.map(option => (
-            <Link className='dropdown-links' to={`/${option}`}>
+            <Link key={option} className='dropdown-links' to={`/${option}`}>
               <li className='menu-item'>{option}</li>
             </Link>
           ))}
