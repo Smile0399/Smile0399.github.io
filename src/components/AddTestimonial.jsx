@@ -34,9 +34,7 @@ const AddTestimonial = () => {
     const addTestimonial = async fullTestimonial => {
       try {
         console.log(fullTestimonial)
-        const docRef = await addDoc(collection(db, 'Testimonials'), {
-          Testimonials: fullTestimonial
-        })
+        await addDoc(collection(db, 'Testimonials'), fullTestimonial)
 
         navigate('/Testimonials')
       } catch (e) {

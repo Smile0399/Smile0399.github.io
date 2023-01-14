@@ -36,9 +36,15 @@ const Update = () => {
               paddingBottom: '150px'
             }}
           >
-            <AddListing />
-            <AddTestimonial />
-            <UpdateListing />
+            <div style={{ flex: '50%' }}>
+              <AddListing />
+            </div>
+            <div style={{ flex: '50%' }}>
+              <AddTestimonial />
+            </div>
+            <div>
+              <UpdateListing />
+            </div>
           </div>
         </div>
       </div>
