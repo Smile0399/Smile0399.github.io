@@ -8,6 +8,7 @@ import {
 } from 'firebase/storage'
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
+import { useNavigate } from 'react-router-dom'
 
 const AddListing = () => {
   const [formData, setFormData] = useState({
@@ -17,10 +18,13 @@ const AddListing = () => {
     city: '',
     state: '',
     zipcode: '',
-    sold: 'test'
+    link: '',
+    sold: false
   })
+  const { image, price, street, city, state, zipcode, link, sold } = formData
 
-  const { image, price, street, city, state, zipcode, sold } = formData
+  const navigate = useNavigate()
+
   const onChange = e => {
     setFormData(prevState => ({
       ...prevState,
@@ -38,7 +42,7 @@ const AddListing = () => {
   const onSubmit = async e => {
     e.preventDefault()
 
-    if (!image || !price || !street || !city || !state || !zipcode) {
+    if (!image || !price || !street || !city || !state || !zipcode || !link) {
       return alert('Missing information')
     }
 
@@ -91,9 +95,18 @@ const AddListing = () => {
 
     // url
     const imageUrl = await storeImage(image)
-    console.log(imageUrl)
 
-    const listing = { imageUrl, price, street, city, state, zipcode, sold }
+    // Recreate object with new imageUrl
+    const listing = {
+      imageUrl,
+      price,
+      street,
+      city,
+      state,
+      zipcode,
+      link,
+      sold
+    }
 
     // Add listing to firestore
     const addListing = async listing => {
@@ -103,16 +116,13 @@ const AddListing = () => {
           Listings: listing
         })
 
-        console.log('Document written with ID: ', docRef.id)
-        console.log('Success')
+        navigate('/Active')
       } catch (e) {
         console.error('Error adding document ', e)
       }
     }
 
     addListing(listing)
-
-    console.log(listing)
   }
   return (
     <div
@@ -190,6 +200,15 @@ const AddListing = () => {
             id='zipcode'
             name='zipcode'
             value={zipcode}
+            onChange={onChange}
+          />
+          <input
+            type='text'
+            className='update-input'
+            placeholder='link'
+            id='link'
+            name='link'
+            value={link}
             onChange={onChange}
           />
           <input type='submit' className='form-submit' value='Add Listing' />

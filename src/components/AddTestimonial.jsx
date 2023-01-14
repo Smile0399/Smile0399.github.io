@@ -55,7 +55,7 @@ const AddTestimonial = () => {
             onChange={onChange}
           />
           <textarea
-            rows='16'
+            rows='20'
             cols='5'
             type='text'
             className='update-input'

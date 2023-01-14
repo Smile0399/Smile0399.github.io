@@ -10,6 +10,7 @@ import Testimonials from './pages/Testimonials'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
 import Update from './pages/Update'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path='/Contact' element={<Contact />}></Route>
             <Route path='/Login' element={<Login />}></Route>
             <Route path='/Update' element={<Update />}></Route>
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </div>
       </Router>
