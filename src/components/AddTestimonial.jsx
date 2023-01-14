@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '../firebase.config'
+import { useNavigate } from 'react-router-dom'
 
 const AddTestimonial = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +10,8 @@ const AddTestimonial = () => {
   })
 
   const { name, testimonial } = formData
+
+  const navigate = useNavigate()
 
   const onChange = e => {
     setFormData(prevState => ({
@@ -17,7 +22,29 @@ const AddTestimonial = () => {
 
   const onSubmit = e => {
     e.preventDefault()
-    console.log(name, testimonial)
+
+    if (!name || !testimonial) {
+      return alert('Missing information')
+    }
+
+    // Create full testimonial object
+    const fullTestimonial = { name, testimonial }
+
+    // Add testimonial to firestore
+    const addTestimonial = async fullTestimonial => {
+      try {
+        console.log(fullTestimonial)
+        const docRef = await addDoc(collection(db, 'Testimonials'), {
+          Testimonials: fullTestimonial
+        })
+
+        navigate('/Testimonials')
+      } catch (e) {
+        console.error('Error adding document ', e)
+      }
+    }
+
+    addTestimonial(fullTestimonial)
   }
 
   return (

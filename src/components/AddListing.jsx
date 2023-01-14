@@ -21,6 +21,7 @@ const AddListing = () => {
     link: '',
     sold: false
   })
+
   const { image, price, street, city, state, zipcode, link, sold } = formData
 
   const navigate = useNavigate()
