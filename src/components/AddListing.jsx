@@ -2,7 +2,6 @@ import { useState } from 'react'
 import {
   getStorage,
   ref,
-  uploadBytes,
   uploadBytesResumable,
   getDownloadURL
 } from 'firebase/storage'
@@ -19,7 +18,7 @@ const AddListing = () => {
     state: '',
     zipcode: '',
     link: '',
-    sold: false
+    sold: 'Active'
   })
 
   const { image, price, street, city, state, zipcode, link, sold } = formData
@@ -113,9 +112,7 @@ const AddListing = () => {
     const addListing = async listing => {
       try {
         console.log(listing)
-        const docRef = await addDoc(collection(db, 'Listings'), {
-          Listings: listing
-        })
+        await addDoc(collection(db, 'Listings'), listing)
 
         navigate('/Active')
       } catch (e) {

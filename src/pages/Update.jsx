@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../firebase.config'
 
 import AddListing from '../components/AddListing'
 import AddTestimonial from '../components/AddTestimonial'
+import UpdateListing from '../components/UpdateListing'
 
 const Update = () => {
   const navigate = useNavigate()
@@ -37,6 +38,7 @@ const Update = () => {
           >
             <AddListing />
             <AddTestimonial />
+            <UpdateListing />
           </div>
         </div>
       </div>
