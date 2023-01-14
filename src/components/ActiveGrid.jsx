@@ -38,12 +38,16 @@ const ActiveGrid = ({ url }) => {
           const { imageUrl, price, street, city, state, zipcode, link } =
             listing
 
+          const formatPrice = price
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
           return (
             <a target='_blank' rel='noopener noreferrer' href={link}>
               <div className='active-div'>
                 <img className='active-img' src={imageUrl} alt='House' />
                 <div className='active-header'>
-                  <div className='active-amount'>${price}</div>
+                  <div className='active-amount'>${formatPrice}</div>
                 </div>
                 <div className='active-footer'>
                   <div className='active-address'>{street}</div>
