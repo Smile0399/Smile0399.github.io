@@ -2,23 +2,25 @@ import { useState } from 'react'
 import {
   getStorage,
   ref,
+  uploadBytes,
   uploadBytesResumable,
   getDownloadURL
 } from 'firebase/storage'
+import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 
 const AddListing = () => {
   const [formData, setFormData] = useState({
-    url: '',
+    image: '',
     price: '',
     street: '',
     city: '',
     state: '',
     zipcode: '',
-    sold: false
+    sold: 'test'
   })
 
-  const { url, price, street, city, state, zipcode, sold } = formData
+  const { image, price, street, city, state, zipcode, sold } = formData
   const onChange = e => {
     setFormData(prevState => ({
       ...prevState,
@@ -29,24 +31,87 @@ const AddListing = () => {
   const onMutate = e => {
     setFormData(prevState => ({
       ...prevState,
-      url: e.target.files
+      image: e.target.files
     }))
   }
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault()
 
-    if (!url || !price || !street || !city || !state || !zipcode) {
+    if (!image || !price || !street || !city || !state || !zipcode) {
       return alert('Missing information')
     }
 
     // check to make sure the image is of a valid type
-    const isValid = /\.(jpg|jpeg|png)$/i.test(url[0].name)
+    const isValid = /\.(jpg|jpeg|png)$/i.test(image[0].name)
     if (!isValid) {
       return alert('Invalid file type please select a jpg, jpeg, or png file')
     }
 
-    const listing = { url, price, street, city, state, zipcode, sold }
+    // save the image in firebase and return url
+    const storeImage = async image => {
+      return new Promise((resolve, reject) => {
+        const storage = getStorage()
+        const fileName = `${image[0].name}`
+
+        const storageRef = ref(storage, 'images/' + fileName)
+        const uploadTask = uploadBytesResumable(storageRef, image[0])
+
+        uploadTask.on(
+          'state_changed',
+          snapshot => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            console.log('Upload is ' + progress + '% done')
+            switch (snapshot.state) {
+              case 'paused':
+                console.log('Upload is paused')
+                break
+              case 'running':
+                console.log('Upload is running')
+                break
+              default:
+                break
+            }
+          },
+          error => {
+            console.log('Failed upload')
+            reject(error)
+          },
+          () => {
+            // Handle successful uploads on complete
+            // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+            getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+              resolve(downloadURL)
+            })
+          }
+        )
+      })
+    }
+
+    // url
+    const imageUrl = await storeImage(image)
+    console.log(imageUrl)
+
+    const listing = { imageUrl, price, street, city, state, zipcode, sold }
+
+    // Add listing to firestore
+    const addListing = async listing => {
+      try {
+        console.log(listing)
+        const docRef = await addDoc(collection(db, 'Listings'), {
+          Listings: listing
+        })
+
+        console.log('Document written with ID: ', docRef.id)
+        console.log('Success')
+      } catch (e) {
+        console.error('Error adding document ', e)
+      }
+    }
+
+    addListing(listing)
+
     console.log(listing)
   }
   return (
@@ -76,9 +141,9 @@ const AddListing = () => {
           <input
             type='file'
             className='update-input'
-            id='url'
-            label='url'
-            name='url'
+            id='image'
+            label='image'
+            name='image'
             accept='image/*'
             onChange={onMutate}
           />

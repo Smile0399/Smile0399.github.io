@@ -31,7 +31,8 @@ const Update = () => {
             style={{
               display: 'flex',
               justifyContent: 'space-evenly',
-              flexWrap: 'wrap'
+              flexWrap: 'wrap',
+              paddingBottom: '150px'
             }}
           >
             <AddListing />
