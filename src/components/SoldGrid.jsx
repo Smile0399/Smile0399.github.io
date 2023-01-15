@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getDocs, collection } from 'firebase/firestore'
 import { db } from '../firebase.config'
 
-const ActiveGrid = ({ url }) => {
+const SoldGrid = ({ url }) => {
   const [listingData, setListingData] = useState([])
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const ActiveGrid = ({ url }) => {
             id
           } = listing
 
-          if (sold === 'Sold') {
+          if (sold === 'Active') {
             return console.log('No Listings')
           }
 
@@ -58,6 +58,9 @@ const ActiveGrid = ({ url }) => {
             <a key={id} target='_blank' rel='noopener noreferrer' href={link}>
               <div className='active-div'>
                 <img className='active-img' src={imageUrl} alt='House' />
+                <div className='active-sold'>
+                  <div className='active-sold-text'>SOLD</div>
+                </div>
                 <div className='active-header'>
                   <div className='active-amount'>${formatPrice}</div>
                 </div>
@@ -75,4 +78,4 @@ const ActiveGrid = ({ url }) => {
     </div>
   )
 }
-export default ActiveGrid
+export default SoldGrid

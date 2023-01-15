@@ -179,6 +179,22 @@ body {
   cursor: pointer
 }
 
+.active-sold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 50px;
+  color:white;
+  background-color: red;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 0%);
+  text-align: right;
+}
+
+.active-sold-text {
+  transform: translate(15px, -40px);
+  rotate: calc(40deg);
+}
+
 /* ~~~~~~~~~~~~~~~~~~~~~~Login~~~~~~~~~~~~~~~~~~~~~~ */
 
 .login-email {
