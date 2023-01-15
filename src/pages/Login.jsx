@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../firebase.config'
 import {
@@ -16,6 +16,14 @@ const Login = () => {
   const { email, password } = formData
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        navigate('/Update')
+      }
+    })
+  })
 
   const onChange = e => {
     setFormData(prevState => ({

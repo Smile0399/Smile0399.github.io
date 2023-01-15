@@ -234,3 +234,19 @@ body {
   border-radius: 4px;
   box-sizing: border-box;
 }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~Testimonials~~~~~~~~~~~~~~~~~~~~~~ */
+
+.testimonial-container {
+  max-width: 650px;
+  font-size: 20px;
+  background: white;
+  text-align: center;
+  padding: 25px;
+  margin-bottom: 35px;
+  border-radius: 15px;
+}
+
+.testimonial-signature {
+  margin-top: 25px;
+}
