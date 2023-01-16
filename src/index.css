@@ -270,3 +270,19 @@ body {
 .testimonial-signature {
   margin-top: 15px;
 }
+
+/* ~~~~~~~~~~~~~~~~~~~~~~Contact~~~~~~~~~~~~~~~~~~~~~~ */
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  max-height: 650px;
+  font-size: 20px;
+  background: white;
+  text-align: center;
+  padding: 25px;
+  margin-bottom: 35px;
+  border-radius: 15px;
+}
