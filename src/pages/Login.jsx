@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../firebase.config'
-import {
-  setPersistence,
-  signInWithEmailAndPassword,
-  browserSessionPersistence
-} from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -49,6 +45,7 @@ const Login = () => {
       .catch(error => {
         const errorCode = error.code
         const errorMessage = error.message
+        console.log(errorCode, errorMessage)
       })
   }
 
