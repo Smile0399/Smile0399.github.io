@@ -33,44 +33,56 @@ const ActiveGrid = ({ url }) => {
       {!listingData ? (
         <div>Loading...</div>
       ) : (
-        listingData.map(listing => {
-          const {
-            imageUrl,
-            price,
-            street,
-            city,
-            state,
-            zipcode,
-            link,
-            sold,
-            id
-          } = listing
+        <>
+          {listingData.filter(listing => listing.sold === 'Active').length >
+          0 ? (
+            listingData.map(listing => {
+              const {
+                imageUrl,
+                price,
+                street,
+                city,
+                state,
+                zipcode,
+                link,
+                sold,
+                id
+              } = listing
 
-          if (sold === 'Sold') {
-            return console.log('No Listings')
-          }
+              if (sold === 'Sold') {
+                return console.log('No Listings')
+              }
 
-          const formatPrice = price
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+              const formatPrice = price
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
-          return (
-            <a key={id} target='_blank' rel='noopener noreferrer' href={link}>
-              <div className='active-div'>
-                <img className='active-img' src={imageUrl} alt='House' />
-                <div className='active-header'>
-                  <div className='active-amount'>${formatPrice}</div>
-                </div>
-                <div className='active-footer'>
-                  <div className='active-address'>{street}</div>
-                  <div className='active-zipcode'>
-                    {city}, {state} {zipcode}
+              return (
+                <a
+                  key={id}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href={link}
+                >
+                  <div className='active-div'>
+                    <img className='active-img' src={imageUrl} alt='House' />
+                    <div className='active-header'>
+                      <div className='active-amount'>${formatPrice}</div>
+                    </div>
+                    <div className='active-footer'>
+                      <div className='active-address'>{street}</div>
+                      <div className='active-zipcode'>
+                        {city}, {state} {zipcode}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </a>
-          )
-        })
+                </a>
+              )
+            })
+          ) : (
+            <div>More to come...</div>
+          )}
+        </>
       )}
     </div>
   )
