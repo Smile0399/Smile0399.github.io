@@ -31,7 +31,7 @@ const ActiveGrid = ({ url }) => {
   return (
     <div className='active-grid'>
       {!listingData ? (
-        <div>Loading</div>
+        <div>Loading...</div>
       ) : (
         listingData.map(listing => {
           const {

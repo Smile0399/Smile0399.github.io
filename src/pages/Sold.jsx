@@ -44,6 +44,53 @@ const Sold = () => {
             <SoldGrid />
           </div>
         </div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '150px',
+            paddingBottom: '150px'
+          }}
+        >
+          <div className='contact-container'>
+            <div>
+              <div style={{ width: '250px', height: '250px' }}>
+                <img
+                  style={{
+                    borderRadius: '50%',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                  src='Contact.jpg'
+                  alt='KW LOGO'
+                />
+              </div>
+              <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
+                License #98047
+              </div>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingLeft: '25px'
+              }}
+            >
+              <div style={{ margin: '15px' }}>Pam Taylor</div>
+              <div style={{ margin: '15px' }}>
+                <i className='fa-solid fa-phone'></i>
+                <span>&nbsp;&nbsp;Phone 1-425-530-1128</span>
+              </div>
+              <div style={{ margin: '15px', whiteSpace: 'nowrap' }}>
+                <i className='fa-solid fa-envelope'></i>
+                <span>&nbsp;&nbsp;Pamtaylor.kw@gmail.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
