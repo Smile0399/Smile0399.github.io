@@ -8,6 +8,7 @@ import {
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const AddListing = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const AddListing = () => {
     price: '',
     street: '',
     city: '',
-    state: '',
+    state: 'WA',
     zipcode: '',
     link: '',
     sold: 'Active'
@@ -79,6 +80,7 @@ const AddListing = () => {
             }
           },
           error => {
+            toast.error('Failed to upload')
             console.log('Failed upload')
             reject(error)
           },
@@ -114,8 +116,10 @@ const AddListing = () => {
         console.log(listing)
         await addDoc(collection(db, 'Listings'), listing)
 
+        toast.success('Upload Success')
         navigate('/Active')
       } catch (e) {
+        toast.error('Upload Failed')
         console.error('Error adding document ', e)
       }
     }
@@ -145,7 +149,7 @@ const AddListing = () => {
         }}
       >
         <div style={{ paddingBottom: '15px' }}>Add Listing</div>
-        <form onSubmit={e => onSubmit(e)}>
+        <form onSubmit={e => onSubmit(e)} autoComplete='off'>
           <input
             type='file'
             className='update-input'

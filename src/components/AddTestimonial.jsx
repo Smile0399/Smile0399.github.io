@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const AddTestimonial = () => {
   const [formData, setFormData] = useState({
@@ -36,8 +37,10 @@ const AddTestimonial = () => {
         console.log(fullTestimonial)
         await addDoc(collection(db, 'Testimonials'), fullTestimonial)
 
+        toast.success('Upload Successful')
         navigate('/Testimonials')
       } catch (e) {
+        toast.error('Failed to add Testimonial')
         console.error('Error adding document ', e)
       }
     }
@@ -69,7 +72,7 @@ const AddTestimonial = () => {
         }}
       >
         <div style={{ paddingBottom: '15px' }}>Add Testimonial</div>
-        <form onSubmit={e => onSubmit(e)}>
+        <form onSubmit={e => onSubmit(e)} autoComplete='off'>
           <input
             type='text'
             className='update-input'

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
+import { toast } from 'react-toastify'
 
 const SoldUpdater = ({ listing }) => {
   const { price, street, city, state, zipcode, sold, id } = listing
@@ -23,11 +24,17 @@ const SoldUpdater = ({ listing }) => {
 
     console.log(id)
     console.log(formData)
-    await updateDoc(ref, {
-      sold: formData
-    })
+    try {
+      await updateDoc(ref, {
+        sold: formData
+      })
 
-    console.log('success')
+      toast.success('Status Updated')
+      console.log('success')
+    } catch (error) {
+      toast.error('Failure to update')
+      console.log(error)
+    }
   }
 
   return (
