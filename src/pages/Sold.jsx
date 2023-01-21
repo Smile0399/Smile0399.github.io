@@ -20,7 +20,7 @@ const Sold = () => {
             fontSize: '2rem'
           }}
         >
-          Closings
+          Recent sold listings
         </div>
         <div
           style={{
