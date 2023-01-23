@@ -68,7 +68,8 @@ const AddTestimonial = () => {
           width: '300px',
           padding: '15px',
           borderRadius: '15px',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          height: '550px'
         }}
       >
         <div style={{ paddingBottom: '15px' }}>Add Testimonial</div>

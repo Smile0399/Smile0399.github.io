@@ -36,13 +36,13 @@ const Update = () => {
               paddingBottom: '150px'
             }}
           >
-            <div style={{ flex: '50%' }}>
+            <div style={{ flex: '33%' }}>
               <AddListing />
             </div>
-            <div style={{ flex: '50%' }}>
+            <div style={{ flex: '33%' }}>
               <AddTestimonial />
             </div>
-            <div>
+            <div style={{ flex: '33%' }}>
               <UpdateListing />
             </div>
           </div>

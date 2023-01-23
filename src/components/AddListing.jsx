@@ -145,7 +145,8 @@ const AddListing = () => {
           backgroundColor: 'white',
           width: '300px',
           padding: '15px',
-          borderRadius: '15px'
+          borderRadius: '15px',
+          height: '550px'
         }}
       >
         <div style={{ paddingBottom: '15px' }}>Add Listing</div>

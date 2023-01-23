@@ -54,9 +54,10 @@ const UpdateListing = () => {
       >
         <div
           style={{
-            display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            height: '550px',
+            overflowY: 'scroll'
           }}
         >
           {listingData.length < 1 ? (
