@@ -39,7 +39,13 @@ const SoldUpdater = ({ listing, onRemove }) => {
 
   const handleCallback = e => {
     e.preventDefault()
-    onRemove(id)
+
+    const doubleCheck = 'Are you sure you want to delete this?'
+    if (window.confirm(doubleCheck) === true) {
+      onRemove(id)
+    } else {
+      return toast.warning('Nothing deleted')
+    }
   }
 
   return (
