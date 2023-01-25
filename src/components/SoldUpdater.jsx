@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { doc, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc, deleteDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 
@@ -33,6 +33,23 @@ const SoldUpdater = ({ listing }) => {
       console.log('success')
     } catch (error) {
       toast.error('Failure to update')
+      console.log(error)
+    }
+  }
+
+  const onClick = async e => {
+    e.preventDefault()
+
+    const ref = doc(db, 'Listings', id)
+
+    console.log(ref, id)
+
+    try {
+      await deleteDoc(ref, id)
+
+      toast.success('Status Updated')
+    } catch (error) {
+      toast.error('Failure to remove')
       console.log(error)
     }
   }
@@ -87,7 +104,12 @@ const SoldUpdater = ({ listing }) => {
             <label>Sold</label>
           </div>
         </div>
-        <input type='submit' className='form-submit' value='Submit' />
+        <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+          <input type='submit' className='form-submit' value='Submit' />
+          <button className='form-submit' onClick={onClick}>
+            Remove
+          </button>
+        </div>
       </form>
     </div>
   )
