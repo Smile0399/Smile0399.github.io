@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { doc, updateDoc, deleteDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 
-const SoldUpdater = ({ listing }) => {
+const SoldUpdater = ({ listing, onRemove }) => {
   const { price, street, city, state, zipcode, sold, id } = listing
 
   const [formData, setFormData] = useState('')
@@ -37,21 +37,9 @@ const SoldUpdater = ({ listing }) => {
     }
   }
 
-  const onClick = async e => {
+  const handleCallback = e => {
     e.preventDefault()
-
-    const ref = doc(db, 'Listings', id)
-
-    console.log(ref, id)
-
-    try {
-      await deleteDoc(ref, id)
-
-      toast.success('Status Updated')
-    } catch (error) {
-      toast.error('Failure to remove')
-      console.log(error)
-    }
+    onRemove(id)
   }
 
   return (
@@ -106,7 +94,7 @@ const SoldUpdater = ({ listing }) => {
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
           <input type='submit' className='form-submit' value='Submit' />
-          <button className='form-submit' onClick={onClick}>
+          <button className='form-submit' onClick={handleCallback}>
             Remove
           </button>
         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { getDocs, collection } from 'firebase/firestore'
+import { doc, getDocs, deleteDoc, collection } from 'firebase/firestore'
 import { db } from '../firebase.config'
+import { toast } from 'react-toastify'
 
 import SoldUpdater from './SoldUpdater'
 
@@ -28,6 +29,22 @@ const UpdateListing = () => {
     })
 
     setListingData(prevState => listings)
+  }
+
+  const onRemove = async id => {
+    const ref = doc(db, 'Listings', id)
+
+    console.log(ref, id)
+
+    try {
+      await deleteDoc(ref, id)
+
+      setListingData(listingData.filter(listing => listing.id !== id))
+      toast.success('Removed listing')
+    } catch (error) {
+      toast.error('Failure to remove')
+      console.log(error)
+    }
   }
 
   return (
@@ -64,7 +81,13 @@ const UpdateListing = () => {
             <div>Loading</div>
           ) : (
             listingData.map(listing => {
-              return <SoldUpdater key={listing.id} listing={listing} />
+              return (
+                <SoldUpdater
+                  key={listing.id}
+                  onRemove={onRemove}
+                  listing={listing}
+                />
+              )
             })
           )}
         </div>
