@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getDocs, collection } from 'firebase/firestore'
 import { db } from '../firebase.config'
+import arrayShuffle from 'array-shuffle'
 
 const SoldGrid = ({ url }) => {
   const [listingData, setListingData] = useState([])
@@ -25,7 +26,7 @@ const SoldGrid = ({ url }) => {
       listings.push(ref)
     })
 
-    setListingData(prevState => listings)
+    setListingData(prevState => arrayShuffle(listings))
   }
 
   return (
