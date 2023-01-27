@@ -9,6 +9,7 @@ const Header = () => {
       style={{
         height: '80px',
         position: 'absolute',
+        zIndex: 1,
         backgroundColor: '#fff'
       }}
     >
