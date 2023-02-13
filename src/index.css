@@ -237,6 +237,33 @@ body {
 
 /* ~~~~~~~~~~~~~~~~~~~~~~TestimonialReadMore~~~~~~~~~~~~~~~~~~~~~~ */
 
+@keyframes marquee {
+	0%   { transform: translateX(0%); }
+	100% { transform: translateX(-100%); }
+}
+
+.logo-slider {
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;	
+	display: flex;
+}
+
+.logo-slider-div {
+  display: flex;
+	position: relative;
+	animation: marquee 35s linear infinite;
+}
+
+.logo-slider:hover div {
+  animation-play-state: paused;
+}
+
+.logo-slider-img {
+  display: block;
+  height: 400px;
+}
+
 .testimonial-container {
   max-width: 650px;
   font-size: 20px;

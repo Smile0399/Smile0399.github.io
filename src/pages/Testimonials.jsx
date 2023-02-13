@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getDocs, collection } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import TestimonialReadMore from '../components/TestimonialReadMore'
+import ScrollingBanner from '../components/ScrollingBanner'
 
 const Testimonials = () => {
   const [testimonialData, setTestimonialData] = useState([])
@@ -39,6 +40,7 @@ const Testimonials = () => {
           height: '100vh'
         }}
       >
+        <ScrollingBanner />
         <div
           style={{
             display: 'flex',
